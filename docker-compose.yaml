@@ -1,0 +1,28 @@
+version: '3'
+services:
+  jms:
+    container_name: jms
+    image: vromero/activemq-artemis
+    restart: always
+    environment:
+      ARTEMIS_USERNAME: 'AMQ_USER'
+      ARTEMIS_PASSWORD: 'AMQ_PASSWORD'
+    ports:
+      - "61616:61616"
+      - "8161:8161"
+    expose:
+      - 61616
+      - 8161
+
+#  activity:
+#    container_name: activity
+#    image: httpsantos/activity-service:1.1
+#    restart: always
+#    environment:
+#      JMS_BROKER: 'tcp://jms:61616'
+#    ports:
+#      - "8080:8080"
+#    expose:
+#      - 8080
+#    links:
+#      - jms

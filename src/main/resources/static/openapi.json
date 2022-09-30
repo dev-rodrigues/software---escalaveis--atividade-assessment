@@ -1,0 +1,689 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "activity",
+    "version": "1.0.0",
+    "description": ""
+  },
+  "paths": {
+    "/activity": {
+      "summary": "allows a teacher to maintain an activity",
+      "description": "allows a teacher to maintain an activity",
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Activity"
+                  }
+                },
+                "examples": {
+                  "response": {
+                    "value": [
+                      {
+                        "id": 14,
+                        "disciplinaId": 63,
+                        "prazo": "some text",
+                        "enunciado": "some text",
+                        "resposta": "some text"
+                      },
+                      {
+                        "id": 55,
+                        "disciplinaId": 34,
+                        "prazo": "some text",
+                        "enunciado": "some text",
+                        "resposta": "some text"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "description": "activities list"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "some text"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "bad resquest"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "some text"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "not found"
+          }
+        },
+        "operationId": "listActivities",
+        "summary": "activities list"
+      },
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateActivity"
+              },
+              "examples": {
+                "request": {
+                  "value": {
+                    "disciplinaId": 89,
+                    "prazo": "some text",
+                    "enunciado": "some text",
+                    "resposta": "some text"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "response": {
+                    "value": "http://localhost:8080/activity/35"
+                  }
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Activity"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "id": 21,
+                      "disciplinaId": 36,
+                      "prazo": "some text",
+                      "enunciado": "some text",
+                      "resposta": "some text"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "activity"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "some text"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "bad request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "some text"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "not found"
+          }
+        },
+        "summary": "answer a question",
+        "description": "answer a question"
+      }
+    },
+    "/activity/{id}": {
+      "summary": "maintain activities by id",
+      "description": "maintain activities by id",
+      "get": {
+        "parameters": [
+          {
+            "name": "id",
+            "description": "id number",
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            },
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Activity"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "id": 29,
+                      "disciplinaId": 95,
+                      "prazo": "some text",
+                      "enunciado": "some text",
+                      "resposta": "some text"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "successfully get an activity"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Activity"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "id": 29,
+                      "disciplinaId": 92,
+                      "prazo": "some text",
+                      "enunciado": "some text",
+                      "resposta": "some text"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "bad request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "some text"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "not found"
+          }
+        },
+        "operationId": "getById",
+        "summary": "get activity by id",
+        "description": "get activity by id"
+      },
+      "delete": {
+        "parameters": [
+          {
+            "name": "id",
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            },
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "no content"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "bad request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "some text"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "not found"
+          }
+        },
+        "operationId": "destroy",
+        "summary": "destroys an activity",
+        "description": "destroys an activity that does not have a response"
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ]
+    },
+    "/activity/query": {
+      "summary": "performs the search for DEVIDA, CONCLUIDA",
+      "description": "performs the search for DEVIDA, CONCLUIDA",
+      "get": {
+        "parameters": [
+          {
+            "name": "filter",
+            "description": "search filters",
+            "schema": {
+              "enum": [
+                "DEVIDA",
+                "CONCLUIDA"
+              ],
+              "type": "string"
+            },
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Activity"
+                  }
+                },
+                "examples": {
+                  "response": {
+                    "value": [
+                      {
+                        "id": 79,
+                        "disciplinaId": 40,
+                        "prazo": "some text",
+                        "enunciado": "some text",
+                        "resposta": "some text"
+                      },
+                      {
+                        "id": 48,
+                        "disciplinaId": 6,
+                        "prazo": "some text",
+                        "enunciado": "some text",
+                        "resposta": "some text"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "description": "successfully get an activity"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "bad request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "some text"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "not found"
+          }
+        },
+        "operationId": "getByIdFilter",
+        "summary": "get by filter",
+        "description": "get by filter"
+      },
+      "parameters": [
+        {
+          "name": "filter",
+          "description": "",
+          "schema": {
+            "enum": [
+              "DEVIDA",
+              "CONCLUIDA"
+            ],
+            "type": "string"
+          },
+          "in": "query",
+          "required": true
+        }
+      ]
+    },
+    "/submit": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Submit"
+                  }
+                },
+                "examples": {
+                  "response": {
+                    "value": [
+                      {
+                        "id": 23,
+                        "alunoId": 5,
+                        "atividadeId": 48,
+                        "resposta": "some text",
+                        "createdAt": "2018-02-10T09:30Z"
+                      },
+                      {
+                        "id": 54,
+                        "alunoId": 27,
+                        "atividadeId": 39,
+                        "resposta": "some text",
+                        "createdAt": "2018-02-10T09:30Z"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "description": "submissions"
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "some text"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "not found"
+          }
+        },
+        "operationId": "listSubmissions",
+        "summary": "list all submissions",
+        "description": "list all submissions"
+      },
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSubmitActivity"
+              },
+              "examples": {
+                "response": {
+                  "value": {
+                    "atividadeId": 66,
+                    "alunoId": 1,
+                    "resposta": "some text"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "response": {
+                    "value": "http://localhost:8080/submit/35"
+                  }
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Submit"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "id": 30,
+                      "alunoId": 95,
+                      "atividadeId": 90,
+                      "resposta": "some text",
+                      "createdAt": "2018-02-10T09:30Z"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "success in answering"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateActivity": {
+        "title": "Root Type for CreateActivity",
+        "description": "",
+        "required": [
+          "disciplinaId",
+          "enunciado",
+          "prazo",
+          "resposta"
+        ],
+        "type": "object",
+        "properties": {
+          "disciplinaId": {
+            "type": "integer"
+          },
+          "prazo": {
+            "type": "string"
+          },
+          "enunciado": {
+            "type": "string"
+          },
+          "resposta": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "disciplinaId": 1,
+          "prazo": "2022-09-28T23:09:35.576272603Z",
+          "enunciado": "como fazer o at",
+          "resposta": "sofrendo e chorando"
+        }
+      },
+      "CreateSubmitActivity": {
+        "title": "Root Type for CreateSubmitActivity",
+        "description": "",
+        "required": [
+          "alunoId",
+          "atividadeId",
+          "resposta"
+        ],
+        "type": "object",
+        "properties": {
+          "atividadeId": {
+            "type": "integer"
+          },
+          "alunoId": {
+            "type": "integer"
+          },
+          "resposta": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "atividadeId": 1,
+          "alunoId": 1,
+          "resposta": "com muita oração"
+        }
+      },
+      "Activity": {
+        "title": "Root Type for Activity",
+        "description": "",
+        "required": [
+          "disciplinaId",
+          "enunciado",
+          "id",
+          "prazo",
+          "resposta"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "disciplinaId": {
+            "type": "integer"
+          },
+          "prazo": {
+            "type": "string"
+          },
+          "enunciado": {
+            "type": "string"
+          },
+          "resposta": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "id": 1,
+          "disciplinaId": 1,
+          "prazo": "2022-09-28T23:09:35.576272603Z",
+          "enunciado": "como fazer o at",
+          "resposta": "sofrendo e chorando"
+        }
+      },
+      "Submit": {
+        "description": "",
+        "required": [
+          "id",
+          "alunoId",
+          "atividadeId",
+          "resposta",
+          "createdAt"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "format": "int32",
+            "description": "",
+            "type": "integer"
+          },
+          "alunoId": {
+            "description": "",
+            "type": "integer"
+          },
+          "atividadeId": {
+            "format": "int32",
+            "description": "",
+            "type": "integer"
+          },
+          "resposta": {
+            "description": "",
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "description": "",
+            "type": "string"
+          }
+        }
+      },
+      "Error": {
+        "description": "",
+        "required": [
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "message": {
+            "description": "",
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

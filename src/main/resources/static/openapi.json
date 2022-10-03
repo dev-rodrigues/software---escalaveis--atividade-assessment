@@ -642,7 +642,8 @@
           "alunoId",
           "atividadeId",
           "resposta",
-          "createdAt"
+          "createdAt",
+          "note"
         ],
         "type": "object",
         "properties": {
@@ -668,6 +669,11 @@
             "format": "date-time",
             "description": "",
             "type": "string"
+          },
+          "note": {
+            "format": "int64",
+            "description": "",
+            "type": "integer"
           }
         }
       },

@@ -1,10 +1,11 @@
-package com.devrodrigues.atividadeassessment.entrypoint;
+package com.devrodrigues.atividadeassessment.entrypoint.http;
 
-import com.devrodrigues.atividadeassessment.entrypoint.mappers.SubmitActivityMappers;
+import com.devrodrigues.atividadeassessment.entrypoint.http.mappers.SubmitActivityMappers;
 import com.devrodrigues.atividadeassessment.openapi.api.SubmitApi;
 import com.devrodrigues.atividadeassessment.openapi.model.CreateSubmitActivity;
 import com.devrodrigues.atividadeassessment.openapi.model.Submit;
 import com.devrodrigues.atividadeassessment.services.SubmitActivityService;
+import org.mapstruct.factory.Mappers;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,7 +15,7 @@ import java.util.List;
 public class SubmitActivityHttp implements SubmitApi {
 
     private final SubmitActivityService service;
-    private final SubmitActivityMappers mapper = SubmitActivityMappers.INSTANCE;
+    private final SubmitActivityMappers mapper = Mappers.getMapper(SubmitActivityMappers.class);
 
 
     public SubmitActivityHttp(SubmitActivityService service) {

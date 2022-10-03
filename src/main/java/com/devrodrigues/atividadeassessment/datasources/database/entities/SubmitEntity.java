@@ -18,7 +18,7 @@ public class SubmitEntity {
     private Long alunoId;
     private String resposta;
     private Instant createdAt;
-
+    private Long note;
     @ManyToOne
     @JoinColumn(name = "atividade_id")
     private ActivityEntity activity;
@@ -61,5 +61,13 @@ public class SubmitEntity {
 
     public void setActivity(ActivityEntity activity) {
         this.activity = activity;
+    }
+
+    public Long getNote() {
+        return note;
+    }
+
+    public void setNote(Long note) {
+        this.note = note;
     }
 }

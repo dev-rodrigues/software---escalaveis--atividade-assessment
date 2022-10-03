@@ -1,14 +1,11 @@
-package com.devrodrigues.atividadeassessment.entrypoint.mappers;
+package com.devrodrigues.atividadeassessment.entrypoint.http.mappers;
 
 import com.devrodrigues.atividadeassessment.core.Activity;
 import com.devrodrigues.atividadeassessment.openapi.model.CreateActivity;
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 
 @Mapper
 public interface ActivityHttpMappers {
-
-    ActivityHttpMappers INSTANCE = Mappers.getMapper(ActivityHttpMappers.class);
 
     Activity map(CreateActivity dto);
 

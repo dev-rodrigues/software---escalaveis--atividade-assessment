@@ -1,4 +1,4 @@
-package com.devrodrigues.atividadeassessment.entrypoint.mappers;
+package com.devrodrigues.atividadeassessment.entrypoint.http.mappers;
 
 import com.devrodrigues.atividadeassessment.core.Submit;
 import com.devrodrigues.atividadeassessment.openapi.model.CreateSubmitActivity;
@@ -12,8 +12,6 @@ import java.time.OffsetDateTime;
 
 @Mapper
 public interface SubmitActivityMappers {
-
-    SubmitActivityMappers INSTANCE = Mappers.getMapper(SubmitActivityMappers.class);
 
     @Mapping(target = "createdAt", expression = "java(Instant.now())")
     Submit map(CreateSubmitActivity dto);

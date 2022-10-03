@@ -1,36 +1,35 @@
 package com.devrodrigues.atividadeassessment.config;
 
 import org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.jms.DefaultJmsListenerContainerFactoryConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jms.connection.CachingConnectionFactory;
+import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
+import org.springframework.jms.config.JmsListenerContainerFactory;
 import org.springframework.jms.core.JmsTemplate;
 
-import java.util.logging.Logger;
+import javax.jms.ConnectionFactory;
+import javax.jms.JMSException;
 
 @Configuration
 public class JMSConfiguration {
 
-    private final Logger logger = Logger.getLogger(JMSConfiguration.class.getName());
-    @Value("${artemis.broker-url}")
-    private String brokerUrl;
-
     @Bean
-    public ActiveMQConnectionFactory senderActiveMQConnectionFactory() {
-        logger.info("broker url: " + brokerUrl);
-
-        return new ActiveMQConnectionFactory(brokerUrl, "AMQ_USER", "AMQ_PASSWORD");
+    public ConnectionFactory connectionFactory() throws JMSException {
+        return new ActiveMQConnectionFactory("tcp://localhost:61616", "AMQ_USER", "AMQ_PASSWORD");
     }
 
     @Bean
-    public CachingConnectionFactory cachingConnectionFactory() {
-        return new CachingConnectionFactory(
-                senderActiveMQConnectionFactory());
+    public JmsListenerContainerFactory<?> jsaFactory(ConnectionFactory connectionFactory, DefaultJmsListenerContainerFactoryConfigurer configurer) {
+        DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
+        configurer.configure(factory, connectionFactory);
+        return factory;
     }
 
     @Bean
-    public JmsTemplate jmsTemplate() {
-        return new JmsTemplate(cachingConnectionFactory());
+    public JmsTemplate jmsTemplate() throws JMSException {
+        JmsTemplate template = new JmsTemplate();
+        template.setConnectionFactory(connectionFactory());
+        return template;
     }
 }

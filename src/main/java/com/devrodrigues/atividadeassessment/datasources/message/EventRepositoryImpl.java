@@ -1,6 +1,8 @@
 package com.devrodrigues.atividadeassessment.datasources.message;
 
+import com.devrodrigues.atividadeassessment.core.Submit;
 import com.devrodrigues.atividadeassessment.repositories.EventRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
@@ -17,8 +19,12 @@ public class EventRepositoryImpl implements EventRepository {
     }
 
     @Override
-    public void store(Integer event) {
-        var json = mapper.convertValue(event, String.class);
-        jmsTemplate.convertAndSend("activity.submitted.queue", json);
+    public void notifyEvaluation(Submit event) {
+            try {
+                String json = mapper.writeValueAsString(event);
+                jmsTemplate.convertAndSend("activity.submitted.queue", json);
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
     }
 }

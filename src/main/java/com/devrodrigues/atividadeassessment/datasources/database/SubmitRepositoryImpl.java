@@ -31,4 +31,10 @@ public class SubmitRepositoryImpl implements SubmitRepository {
         var entities = repository.findAll();
         return entities.stream().map(mapper::map).toList();
     }
+
+    @Override
+    public Submit getById(Long submitId) {
+        var entity = repository.findById(submitId).orElseThrow();
+        return mapper.map(entity);
+    }
 }

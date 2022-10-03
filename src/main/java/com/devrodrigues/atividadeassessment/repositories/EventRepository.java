@@ -1,5 +1,7 @@
 package com.devrodrigues.atividadeassessment.repositories;
 
+import com.devrodrigues.atividadeassessment.core.Submit;
+
 public interface EventRepository {
-    void store(Integer event);
+    void notifyEvaluation(Submit event);
 }

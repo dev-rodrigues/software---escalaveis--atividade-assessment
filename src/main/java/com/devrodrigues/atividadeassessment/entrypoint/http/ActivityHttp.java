@@ -1,11 +1,12 @@
-package com.devrodrigues.atividadeassessment.entrypoint;
+package com.devrodrigues.atividadeassessment.entrypoint.http;
 
 import com.devrodrigues.atividadeassessment.openapi.api.ActivityApi;
 import com.devrodrigues.atividadeassessment.openapi.model.Activity;
 import com.devrodrigues.atividadeassessment.openapi.model.CreateActivity;
 import com.devrodrigues.atividadeassessment.openapi.model.Error;
 import com.devrodrigues.atividadeassessment.services.ActivityService;
-import com.devrodrigues.atividadeassessment.entrypoint.mappers.ActivityHttpMappers;
+import com.devrodrigues.atividadeassessment.entrypoint.http.mappers.ActivityHttpMappers;
+import org.mapstruct.factory.Mappers;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +21,7 @@ import static java.util.stream.Collectors.toList;
 public class ActivityHttp implements ActivityApi {
 
     private final ActivityService service;
-    private final ActivityHttpMappers mapper = ActivityHttpMappers.INSTANCE;
+    private final ActivityHttpMappers mapper = Mappers.getMapper(ActivityHttpMappers.class);
 
 
     public ActivityHttp(ActivityService service) {
@@ -32,7 +33,7 @@ public class ActivityHttp implements ActivityApi {
         return ResponseEntity.ok(
                 service.list()
                         .stream()
-                        .map(ActivityHttpMappers.INSTANCE::map)
+                        .map(mapper::map)
                         .collect(toList())
         );
     }

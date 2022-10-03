@@ -21,7 +21,7 @@ public class SubmitActivityService {
 
     public Submit create(Submit submit) {
         var response = repository.store(submit);
-        eventRepository.store(1);
+        eventRepository.notifyEvaluation(response);
         return response;
     }
 

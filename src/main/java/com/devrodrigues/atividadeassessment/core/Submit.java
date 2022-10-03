@@ -7,6 +7,7 @@ public record Submit(
         Long alunoId,
         Long atividadeId,
         String resposta,
-        Instant createdAt
+        Instant createdAt,
+        Long note
 ) {
 }

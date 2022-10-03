@@ -8,4 +8,6 @@ public interface SubmitRepository {
 
     Submit store(Submit submit);
     List<Submit> list();
+
+    Submit getById(Long submitId);
 }
